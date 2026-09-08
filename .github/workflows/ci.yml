@@ -1,0 +1,38 @@
+name: ClipSync CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Server Dependencies & Run Unit Tests
+        run: |
+          cd server
+          npm install
+          npm test
+
+      - name: Run Integration Tests
+        run: |
+          cd server
+          node test/integration.test.js
+
+      - name: Install Client Dependencies & Build Mobile PWA
+        run: |
+          cd client
+          npm install
+          npm run build

@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+client/dist/
+
+# Runtime data & logs (protect user privacy)
+server/data/
+server/server.pid
+server/*.log
+*.log
+
+# Temporary push script
+scripts/github-push.mjs
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
