@@ -32,6 +32,7 @@ export class SyncServer {
     const interfaces = os.networkInterfaces();
     let fallbackIp = '127.0.0.1';
     let wifiIp = null;
+    let bluetoothIp = null;
     let ethernetIp = null;
 
     for (const [name, nets] of Object.entries(interfaces)) {
@@ -54,7 +55,9 @@ export class SyncServer {
             continue;
           }
 
-          if (lower.includes('wi-fi') || lower.includes('wlan') || lower.includes('wireless')) {
+          if (lower.includes('bluetooth') || lower.includes('bt') || lower.includes('bth') || lower.includes('pan')) {
+            bluetoothIp = net.address;
+          } else if (lower.includes('wi-fi') || lower.includes('wlan') || lower.includes('wireless')) {
             wifiIp = net.address;
           } else if (lower.includes('ethernet') && !ethernetIp) {
             ethernetIp = net.address;
@@ -65,7 +68,8 @@ export class SyncServer {
       }
     }
 
-    return wifiIp || ethernetIp || fallbackIp;
+    // Priority: Wi-Fi -> Bluetooth Tethering (PAN) -> Ethernet -> Fallback
+    return wifiIp || bluetoothIp || ethernetIp || fallbackIp;
   }
 
   getAllLocalIps() {

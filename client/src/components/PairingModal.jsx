@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { QrCode, X, Laptop, Check, Copy, ExternalLink, HelpCircle } from 'lucide-react';
+import { QrCode, X, Laptop, Check, Copy, ExternalLink, HelpCircle, Bluetooth } from 'lucide-react';
 import { copyTextToClipboard } from '../utils/clipboard.js';
 
 export function PairingModal({ isOpen, onClose, serverInfo, currentHost, onToast }) {
@@ -78,6 +78,29 @@ export function PairingModal({ isOpen, onClose, serverInfo, currentHost, onToast
             <ul className="guide-steps">
               <li><strong>Android:</strong> Tap the 3 dots in Chrome/Edge &rarr; <em>"Add to Home screen"</em> or <em>"Install app"</em>.</li>
               <li><strong>iPhone:</strong> Tap the Share button in Safari &rarr; <em>"Add to Home Screen"</em>.</li>
+            </ul>
+          </div>
+
+          <div className="guide-box bt-guide-box">
+            <div className="guide-header">
+              <Bluetooth size={16} style={{ color: '#38bdf8' }} />
+              <strong>No Wi-Fi? Sync via Bluetooth:</strong>
+            </div>
+            <ul className="guide-steps">
+              <li>
+                <strong>Bluetooth Tethering (Zero Wi-Fi & Zero Data):</strong>
+                <div style={{ marginTop: '2px', color: 'var(--text-secondary)' }}>
+                  1. On Phone: Turn on <em>Bluetooth Tethering</em> (in Hotspot / Tethering settings).<br />
+                  2. On PC: Go to <em>Settings &rarr; Bluetooth</em> &rarr; Click your phone &rarr; Connect to <em>PAN / Access point</em>.<br />
+                  3. ClipSync syncs across Bluetooth instantly!
+                </div>
+              </li>
+              <li style={{ marginTop: '6px' }}>
+                <strong>Offline Phone Hotspot:</strong>
+                <div style={{ marginTop: '2px', color: 'var(--text-secondary)' }}>
+                  Turn on your phone's Hotspot (no mobile data needed) and connect PC to it.
+                </div>
+              </li>
             </ul>
           </div>
 
